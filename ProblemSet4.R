@@ -86,5 +86,31 @@ setMethod("PlayGame", "door",
             else{return("GOAT!")}
           })
 
+#Now for the thousand simulations. First, the people who do not switch
+
+noSwitchGame<-function(i){
+  game<-new("door", chosenDoor=1,carDoor=1,switch=FALSE)
+  result<-PlayGame(game)
+  return(result)
+}
 
 
+noSwitchResult<-sapply(c(1:1000),noSwitchGame)      # simulates a no switch game 1000 times
+tabNoSwitch<-table(noSwitchResult)        #creates a table of the no switch result games
+tabNoSwitch
+
+
+#Thousand simulation, people who do Switch
+SwitchGame<-function(i){
+  game<-new("door", chosenDoor=1,carDoor=1,switch=TRUE)
+  result<-PlayGame(game)
+  return(result)
+}
+
+
+SwitchResult<-sapply(c(1:1000),noSwitchGame)      # simulates a switch game 1000 times
+tabSwitch<-table(noSwitchResult)        #creates a table of the switch result games
+tabSwitch
+
+
+#Looking at the tables, we see that switching doubles your chances to win in the Monty Hall problem, from 33% to 66%
